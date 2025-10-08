@@ -1,7 +1,7 @@
-package kryszque.todoapp.tasks;
+package kryszque.todoapp.model.tasks;
 
 import java.lang.Object;
-import static kryszque.todoapp.dates.DatesManager.checkDate;
+import static kryszque.todoapp.model.dates.DatesManager.checkDate;
 
 public class Task {
     private int id;

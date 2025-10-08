@@ -1,4 +1,4 @@
-package kryszque.todoapp.dates;
+package kryszque.todoapp.model.dates;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

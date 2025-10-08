@@ -1,6 +1,6 @@
-package kryszque.todoapp.db;
+package kryszque.todoapp.model.db;
 
-import kryszque.todoapp.tasks.Task;
+import kryszque.todoapp.model.tasks.Task;
 
 import java.sql.*;
 import java.util.ArrayList;

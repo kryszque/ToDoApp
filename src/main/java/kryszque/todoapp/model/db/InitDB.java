@@ -1,4 +1,4 @@
-package kryszque.todoapp.db;
+package kryszque.todoapp.model.db;
 
 import java.sql.Connection;
 import java.sql.Statement;
