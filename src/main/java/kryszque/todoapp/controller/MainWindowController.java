@@ -43,10 +43,14 @@ public class MainWindowController {
         newTask.setCategory(categoryField.getText());
         if (datePicker.getValue() != null) {
             newTask.setDate(datePicker.getValue().format(formatter));
-        } else {
-            // Obsługa błędu - data nie została wybrana
-            showAlert("Błąd", "Data nie została wybrana.");
+        } else if (newTask.getTitle() != null && newTask.getCategory() != null) {
+            // Exception - date wasn't picked
+        showAlert("No date picked!", "Please pick a date.");
             return;
+        }
+        else{
+            showAlert("Fileds not filled!", "Please fill all fields.");
+
         }
         newTask.setDescription(descriptionArea.getText());
         newTask.setPriority((int) prioritySlider.getValue());
@@ -55,8 +59,10 @@ public class MainWindowController {
             taskDAO.addTask(newTask);
             clearFields();
             loadTasks();
-        } else {
-            showAlert("Błąd", "Proszę wypełnić wszystkie pola poprawnie.");
+        } else if (newTask.getTitle() == null && newTask.getCategory() == null) {
+            showAlert("Fileds not filled!", "Please fill all fields.");
+        } else if (newTask.getDate() == null){
+            showAlert("Invalid date!", "Please provide a valid date.");
         }
     }
     private void showAlert(String title, String message) {
