@@ -9,7 +9,8 @@ public class InitDB {
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "title TEXT NOT NULL,"
                 + "category TEXT NOT NULL,"
-                + "date TEXT NOT NULL,"
+                + "due_to_date TEXT NOT NULL,"
+                + "add_date TEXT NOT NULL,"
                 + "description TEXT,"
                 + "priority INTEGER DEFAULT 3,"
                 + "done INTEGER DEFAULT 0);";

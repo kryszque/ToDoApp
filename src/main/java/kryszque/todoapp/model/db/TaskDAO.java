@@ -9,15 +9,16 @@ import java.util.List;
 public class TaskDAO {
 
     public void addTask(Task task){
-        String query = "INSERT INTO tasks (title, category, date, description, priority) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tasks (title, category, due_to_date,add_date, description, priority) VALUES (?, ?, ?, ?, ?, ?)";
         try(Connection connection = Database.setConnection();
             PreparedStatement pstmt = connection.prepareStatement(query)){
 
             pstmt.setString(1, task.getTitle());
             pstmt.setString(2, task.getCategory());
-            pstmt.setString(3, task.getDate());
-            pstmt.setString(4, task.getDescription());
-            pstmt.setInt(5, task.getPriority());
+            pstmt.setString(3, task.getDue_to_date());
+            pstmt.setString(4, task.getAddDate());
+            pstmt.setString(5, task.getDescription());
+            pstmt.setInt(6, task.getPriority());
 
             pstmt.executeUpdate();
         } catch (SQLException e){
@@ -27,7 +28,7 @@ public class TaskDAO {
 
     public List<Task> getTasks() {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT id, title, category, date, description, priority, done FROM tasks";
+        String sql = "SELECT id, title, category, due_to_date, add_date, description, priority, done FROM tasks";
 
         try (Connection connection = Database.setConnection();
              Statement stmt = connection.createStatement();
@@ -37,7 +38,8 @@ public class TaskDAO {
                 Task task = new Task();
                 task.setTitle(rs.getString("title"));
                 task.setCategory(rs.getString("category"));
-                task.setDate(rs.getString("date"));
+                task.setDue_to_date(rs.getString("due_to_date"));
+                task.setAdd_date(rs.getString("add_date"));
                 task.setDescription(rs.getString("description"));
                 task.setPriority(rs.getInt("priority"));
                 task.setDone(rs.getBoolean("done"));

@@ -5,8 +5,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import kryszque.todoapp.model.db.TaskDAO;
 import kryszque.todoapp.model.tasks.Task;
-
 import java.time.format.DateTimeFormatter;
+import static kryszque.todoapp.model.dates.DatesManager.getCurrentDate;
 
 public class AddTaskWindowController {
 
@@ -35,8 +35,10 @@ public class AddTaskWindowController {
         Task newTask = new Task();
         newTask.setTitle(titleField.getText());
         newTask.setCategory(categoryField.getText());
+        newTask.setAdd_date(getCurrentDate());
+
         if (datePicker.getValue() != null) {
-            newTask.setDate(datePicker.getValue().format(formatter));
+            newTask.setDue_to_date(datePicker.getValue().format(formatter));
         } else if (newTask.getTitle() != null && newTask.getCategory() != null) {
             // Exception - date wasn't picked
             showAlert("No date picked!", "Please pick a date.");
@@ -46,10 +48,17 @@ public class AddTaskWindowController {
             return;
 
         }
-        newTask.setDescription(descriptionArea.getText());
+
+        if(descriptionArea.getText() == null || descriptionArea.getText().isEmpty()){
+            newTask.setDescription("none");
+        }
+        else{
+            newTask.setDescription(descriptionArea.getText());
+        }
+
         newTask.setPriority((int) prioritySlider.getValue());
 
-        if (newTask.getTitle() != null && newTask.getCategory() != null && newTask.getDate() != null) {
+        if (newTask.getTitle() != null && newTask.getCategory() != null && newTask.getDue_to_date() != null) {
             taskDAO.addTask(newTask);
             clearFields();
             mainWindowController.loadTasks();
@@ -57,7 +66,7 @@ public class AddTaskWindowController {
             stage.close();
         } else if (newTask.getTitle() == null && newTask.getCategory() == null) {
             showAlert("Fields not filled!", "Please fill all fields.");
-        } else if (newTask.getDate() == null) {
+        } else if (newTask.getDue_to_date() == null) {
             showAlert("Invalid date!", "Please provide a valid date.");
         }
     }

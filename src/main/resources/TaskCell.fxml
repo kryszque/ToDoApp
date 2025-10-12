@@ -7,23 +7,27 @@
 <VBox fx:id="vbox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       styleClass="task-cell" spacing="5" prefWidth="300">
     <HBox spacing="10">
-        <Label text="Tytuł:" styleClass="label-bold"/>
+        <Label text="Title:" styleClass="label-bold"/>
         <Label fx:id="titleLabel"/>
     </HBox>
     <HBox spacing="10">
-        <Label text="Kategoria:" styleClass="label-bold"/>
+        <Label text="Category:" styleClass="label-bold"/>
         <Label fx:id="categoryLabel"/>
     </HBox>
     <HBox spacing="10">
-        <Label text="Data:" styleClass="label-bold"/>
-        <Label fx:id="dateLabel"/>
+        <Label text="Deadline:" styleClass="label-bold"/>
+        <Label fx:id="dueToDateLabel"/>
     </HBox>
     <HBox spacing="10">
-        <Label text="Opis:" styleClass="label-bold"/>
+        <Label text="Added:" styleClass="label-bold"/>
+        <Label fx:id="addDateLabel"/>
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Description:" styleClass="label-bold"/>
         <Label fx:id="descriptionLabel"/>
     </HBox>
     <HBox spacing="10">
-        <Label text="Priorytet:" styleClass="label-bold"/>
+        <Label text="Priority:" styleClass="label-bold"/>
         <Label fx:id="priorityLabel"/>
     </HBox>
 </VBox>

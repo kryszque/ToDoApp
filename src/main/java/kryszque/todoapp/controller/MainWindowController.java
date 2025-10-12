@@ -47,7 +47,7 @@ public class MainWindowController {
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Dodaj nowe zadanie");
+            stage.setTitle("Add new task");
             stage.setScene(new Scene(root));
             stage.showAndWait();
 

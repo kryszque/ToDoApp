@@ -14,21 +14,21 @@
 
     <HBox spacing="10">
         <VBox spacing="5" HBox.hgrow="ALWAYS">
-            <Label text="Tytuł:"/>
+            <Label text="Title:"/>
             <TextField fx:id="titleField"/>
-            <Label text="Kategoria:"/>
+            <Label text="Category:"/>
             <TextField fx:id="categoryField"/>
-            <Label text="Data (dd-MM-yyyy):"/>
+            <Label text="Date (dd.MM.yyyy):"/>
             <DatePicker fx:id="datePicker"/>
         </VBox>
         <VBox spacing="5" HBox.hgrow="ALWAYS">
-            <Label text="Opis:"/>
+            <Label text="Description:"/>
             <TextArea fx:id="descriptionArea" wrapText="true"/>
-            <Label text="Priorytet:"/>
+            <Label text="Priority:"/>
             <Slider fx:id="prioritySlider" min="1" max="10" blockIncrement="1" showTickLabels="true" showTickMarks="true" majorTickUnit="1" snapToTicks="true"/>
         </VBox>
     </HBox>
 
-    <Button text="Dodaj zadanie" onAction="#handleAddTask"/>
+    <Button text="Add task" onAction="#handleAddTask"/>
 
 </VBox>

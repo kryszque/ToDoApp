@@ -1,13 +1,17 @@
 package kryszque.todoapp.model.tasks;
 
 import java.lang.Object;
+import java.util.Objects;
+
 import static kryszque.todoapp.model.dates.DatesManager.checkDate;
+import static kryszque.todoapp.model.dates.DatesManager.getCurrentDate;
 
 public class Task {
     private int id;
     private String title;
     private String category;
-    private String date;
+    private String due_to_date;
+    private String add_date;
     private String description;
     private Integer priority;
     private boolean done;
@@ -80,26 +84,42 @@ public class Task {
         }
     }
 
-    //date handling
+    //due_to_date handling
 
-    public void setDate(String date) {
+    public void setDue_to_date(String due_to_date) {
         try{
-            if(date == null || date.isEmpty()){
+            if(due_to_date == null || due_to_date.isEmpty()){
                 throw new IllegalArgumentException("Date is empty. Provide a valid one.");
             }
-            if(!checkDate(date)){
+            if(!checkDate(due_to_date)){
                 throw new IllegalArgumentException("Date is either in invalid format or passed. Provide a valid one.");
             }
-            this.date = date;
+            this.due_to_date = due_to_date;
         }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
     }
 
-    public String getDate() {
-        return this.date;
+    public String getDue_to_date() {
+        return this.due_to_date;
     }
-    //more after implementing dates handling
+
+    public void setAdd_date(String add_date) {
+        try{
+            if(add_date == null || add_date.isEmpty()){
+                throw new IllegalArgumentException("add_date is empty.");
+            }
+            if(!checkDate(add_date)){
+                throw new IllegalArgumentException("add_date is either in invalid format or passed.");
+            }
+            this.add_date = add_date;
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());}
+    }
+
+    public String getAddDate(){
+        return this.add_date;
+    }
 
     //content handling
     public void setDescription(String description) {
@@ -172,22 +192,20 @@ public class Task {
 
     @Override
     public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        if(!(o instanceof Task)){
-            return false;
-        }
-        Task comapred_task = (Task) o;
-        return comapred_task.getTitle().equals(this.getTitle()) && comapred_task.getCategory().equals(this.getCategory())
-                && comapred_task.getDate().equals(this.getDate()) && comapred_task.getDescription().equals(this.getDescription())
-                && comapred_task.getPriority().equals(this.getPriority());
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(title, task.title) &&
+                Objects.equals(category, task.category) &&
+                Objects.equals(due_to_date, task.due_to_date) &&
+                Objects.equals(add_date, task.add_date) &&
+                Objects.equals(description, task.description) &&
+                Objects.equals(priority, task.priority);
     }
 
     @Override
     public int hashCode(){
-        return this.getTitle().hashCode() + this.getCategory().hashCode() + this.getDate().hashCode() +
-                this.getDescription().hashCode() + this.getPriority().hashCode();
+        return Objects.hash(title, category, due_to_date, add_date, description, priority);
     }
 
     @Override
@@ -195,7 +213,7 @@ public class Task {
         StringBuilder sb = new StringBuilder();
         sb.append("Title: " + this.getTitle() + "\n");
         sb.append("Category: " + this.getCategory() + "\n");
-        sb.append("Date: " + this.getDate() + "\n");
+        sb.append("Date: " + this.getDue_to_date() + "\n");
         sb.append("Content: " + this.getDescription() + "\n");
         sb.append("Priority: " + this.getPriority() + "\n");
         return sb.toString();

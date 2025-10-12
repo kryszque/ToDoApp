@@ -17,7 +17,9 @@ public class TaskCell extends ListCell<Task> {
     @FXML
     private Label categoryLabel;
     @FXML
-    private Label dateLabel;
+    private Label dueToDateLabel;
+    @FXML
+    private Label addDateLabel;
     @FXML
     private Label descriptionLabel;
     @FXML
@@ -38,7 +40,7 @@ public class TaskCell extends ListCell<Task> {
             if (fxmlLoader == null) {
                 URL fxmlUrl = getClass().getResource("/TaskCell.fxml");
                 if (fxmlUrl == null) {
-                    System.err.println("FATAL: Could not find /TaskCell.fxml. Make sure the file is in src/main/resources");
+                    System.err.println("FATAL: Could not find /TaskCell.fxml.");
                     // Display something basic if the FXML is not found
                     setText("Error: Could not load TaskCell.fxml");
                     setGraphic(null);
@@ -55,7 +57,8 @@ public class TaskCell extends ListCell<Task> {
 
             titleLabel.setText(task.getTitle());
             categoryLabel.setText(task.getCategory());
-            dateLabel.setText(task.getDate());
+            dueToDateLabel.setText(task.getDue_to_date());
+            addDateLabel.setText(task.getAddDate());
             descriptionLabel.setText(task.getDescription());
             priorityLabel.setText(String.valueOf(task.getPriority()));
 

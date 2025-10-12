@@ -8,9 +8,9 @@
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kryszque.todoapp.controller.MainWindowController"
       spacing="10" style="-fx-padding: 10;">
 
-    <Label text="Lista Zadań:"/>
+    <Label text="Tasks list:"/>
     <ListView fx:id="taskListView" VBox.vgrow="ALWAYS"/>
 
-    <Button text="Dodaj zadanie" onAction="#handleAddTaskButton"/>
+    <Button text="Add task" onAction="#handleAddTaskButton"/>
 
 </VBox>

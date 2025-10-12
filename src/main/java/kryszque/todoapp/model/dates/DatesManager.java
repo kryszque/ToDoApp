@@ -15,5 +15,9 @@ public class DatesManager {
         }
     }
 
+    public static String getCurrentDate(){
+        return formatter.format(LocalDate.now());
+    }
+
 
 }
