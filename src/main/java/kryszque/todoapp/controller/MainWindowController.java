@@ -2,82 +2,57 @@ package kryszque.todoapp.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import kryszque.todoapp.model.db.TaskDAO;
 import kryszque.todoapp.model.tasks.Task;
+import kryszque.todoapp.view.TaskCell;
 
-import java.time.format.DateTimeFormatter;
+import java.io.IOException;
+import java.net.URL;
 
 public class MainWindowController {
 
     @FXML
-    private ListView<String> taskListView;
-    @FXML
-    private TextField titleField;
-    @FXML
-    private TextField categoryField;
-    @FXML
-    private DatePicker datePicker;
-    @FXML
-    private TextArea descriptionArea;
-    @FXML
-    private Slider prioritySlider;
+    private ListView<Task> taskListView;
+
 
     private final TaskDAO taskDAO = new TaskDAO();
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 
     @FXML
     public void initialize() {
+        taskListView.setCellFactory(param -> new TaskCell());
         loadTasks();
     }
 
-    private void loadTasks() {
+    public void loadTasks() {
         taskListView.setItems(FXCollections.observableArrayList(taskDAO.getTasks()));
     }
 
     @FXML
-    private void handleAddTask() {
-        Task newTask = new Task();
-        newTask.setTitle(titleField.getText());
-        newTask.setCategory(categoryField.getText());
-        if (datePicker.getValue() != null) {
-            newTask.setDate(datePicker.getValue().format(formatter));
-        } else if (newTask.getTitle() != null && newTask.getCategory() != null) {
-            // Exception - date wasn't picked
-        showAlert("No date picked!", "Please pick a date.");
-            return;
-        }
-        else{
-            showAlert("Fileds not filled!", "Please fill all fields.");
+    private void handleAddTaskButton() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            URL xmlUrl = getClass().getResource("/AddTaskWindow.fxml");
+            loader.setLocation(xmlUrl);
+            Parent root = loader.load();
 
-        }
-        newTask.setDescription(descriptionArea.getText());
-        newTask.setPriority((int) prioritySlider.getValue());
+            AddTaskWindowController controller = loader.getController();
+            controller.setMainWindowController(this);
 
-        if (newTask.getTitle() != null && newTask.getCategory() != null && newTask.getDate() != null) {
-            taskDAO.addTask(newTask);
-            clearFields();
-            loadTasks();
-        } else if (newTask.getTitle() == null && newTask.getCategory() == null) {
-            showAlert("Fileds not filled!", "Please fill all fields.");
-        } else if (newTask.getDate() == null){
-            showAlert("Invalid date!", "Please provide a valid date.");
-        }
-    }
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Dodaj nowe zadanie");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
 
-    private void clearFields() {
-        titleField.clear();
-        categoryField.clear();
-        datePicker.setValue(null);
-        descriptionArea.clear();
-        prioritySlider.setValue(5);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -12,6 +12,9 @@ public class Task {
     private Integer priority;
     private boolean done;
 
+    public Task() {
+    }
+
     //id handling
     public int getId() {
         return this.id;
@@ -128,8 +131,8 @@ public class Task {
         }
     }
 
-   //priority handling
-   public void setPriority(Integer priority) {
+    //priority handling
+    public void setPriority(Integer priority) {
         try{
             if (priority == null || priority < 0 || priority > 10) {
                 throw new IllegalArgumentException("Priority must be between 0 and 10.");
@@ -138,13 +141,13 @@ public class Task {
         } catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
-   }
+    }
 
-   public Integer getPriority() {
+    public Integer getPriority() {
         return this.priority;
-   }
+    }
 
-   public void editPriority(Integer new_priority) {
+    public void editPriority(Integer new_priority) {
         try {
             if (new_priority == null || new_priority < 0 || new_priority > 10) {
                 throw new IllegalArgumentException("Priority must be between 0 and 10.");
@@ -156,19 +159,19 @@ public class Task {
         }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
-   }
+    }
 
-   //handling being done
-   public boolean isDone() {
+    //handling being done
+    public boolean isDone() {
         return this.done;
-   }
+    }
 
-   public void setDone(boolean done) {
-        this.done = true;
-   }
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 
-   @Override
-   public boolean equals(Object o){
+    @Override
+    public boolean equals(Object o){
         if(o == this){
             return true;
         }
@@ -176,18 +179,18 @@ public class Task {
             return false;
         }
         Task comapred_task = (Task) o;
-       return comapred_task.getTitle().equals(this.getTitle()) && comapred_task.getCategory().equals(this.getCategory())
-               && comapred_task.getDate().equals(this.getDate()) && comapred_task.getDescription().equals(this.getDescription())
-               && comapred_task.getPriority().equals(this.getPriority());
-   }
+        return comapred_task.getTitle().equals(this.getTitle()) && comapred_task.getCategory().equals(this.getCategory())
+                && comapred_task.getDate().equals(this.getDate()) && comapred_task.getDescription().equals(this.getDescription())
+                && comapred_task.getPriority().equals(this.getPriority());
+    }
 
-   @Override
-   public int hashCode(){
+    @Override
+    public int hashCode(){
         return this.getTitle().hashCode() + this.getCategory().hashCode() + this.getDate().hashCode() +
                 this.getDescription().hashCode() + this.getPriority().hashCode();
-   }
+    }
 
-   @Override
+    @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Title: " + this.getTitle() + "\n");
@@ -196,6 +199,5 @@ public class Task {
         sb.append("Content: " + this.getDescription() + "\n");
         sb.append("Priority: " + this.getPriority() + "\n");
         return sb.toString();
-   }
+    }
 }
-

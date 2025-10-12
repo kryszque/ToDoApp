@@ -25,8 +25,8 @@ public class TaskDAO {
         }
     }
 
-    public List<String> getTasks() {
-        List<String> tasks = new ArrayList<>();
+    public List<Task> getTasks() {
+        List<Task> tasks = new ArrayList<>();
         String sql = "SELECT id, title, category, date, description, priority, done FROM tasks";
 
         try (Connection connection = Database.setConnection();
@@ -34,18 +34,15 @@ public class TaskDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String title = rs.getString("title");
-                String category = rs.getString("category");
-                String date = rs.getString("date");
-                String description = rs.getString("description");
-                int priority = rs.getInt("priority");
-                boolean done = rs.getBoolean("done");
+                Task task = new Task();
+                task.setTitle(rs.getString("title"));
+                task.setCategory(rs.getString("category"));
+                task.setDate(rs.getString("date"));
+                task.setDescription(rs.getString("description"));
+                task.setPriority(rs.getInt("priority"));
+                task.setDone(rs.getBoolean("done"));
 
-                tasks.add(String.format(
-                        "id: %d. [%s] title: %s, category: %s, priority %d, add date: %s, description: %s",
-                        id, done ? "X" : " ", title, category, priority, date, description
-                ));
+                tasks.add(task);
             }
 
         } catch (SQLException e) {

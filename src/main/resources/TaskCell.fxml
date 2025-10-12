@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox fx:id="vbox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="task-cell" spacing="5" prefWidth="300">
+    <HBox spacing="10">
+        <Label text="Tytuł:" styleClass="label-bold"/>
+        <Label fx:id="titleLabel"/>
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Kategoria:" styleClass="label-bold"/>
+        <Label fx:id="categoryLabel"/>
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Data:" styleClass="label-bold"/>
+        <Label fx:id="dateLabel"/>
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Opis:" styleClass="label-bold"/>
+        <Label fx:id="descriptionLabel"/>
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Priorytet:" styleClass="label-bold"/>
+        <Label fx:id="priorityLabel"/>
+    </HBox>
+</VBox>
