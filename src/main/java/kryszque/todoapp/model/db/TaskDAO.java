@@ -103,14 +103,19 @@ public class TaskDAO {
         }
         if (updatedTask.isDone() != oldTask.isDone()) {
             query.append("done = ?, ");
-            params.add(updatedTask.isDone());
+            params.add(updatedTask.isDone() ? 1 : 0);
         }
-
         if (params.isEmpty()) {
-            throw new IllegalArgumentException("No new fields were given.");
+            System.out.println("No fields (except 'done') were changed.");
+            if (query.toString().contains("done = ?")){
+            } else {
+                throw new IllegalArgumentException("No new fields were given.");
+            }
         }
 
-        query.setLength(query.length() - 2);
+        if(query.charAt(query.length() - 2) == ','){
+            query.setLength(query.length() - 2);
+        }
 
         query.append(" WHERE id = ?");
         params.add(updatedTask.getId());
@@ -142,6 +147,7 @@ public class TaskDAO {
     }
 
     private Task setParameters(Task task, ResultSet rs) throws SQLException {
+            task.setId(rs.getInt("id"));
             task.setTitle(rs.getString("title"));
             task.setCategory(rs.getString("category"));
             task.setDue_to_date(rs.getString("due_to_date"));

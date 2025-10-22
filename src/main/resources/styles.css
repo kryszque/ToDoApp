@@ -11,3 +11,14 @@
 .label-bold {
     -fx-font-weight: bold;
 }
+
+/* NOWA KLASA DLA UKOŃCZONYCH ZADAŃ */
+.task-cell-done {
+    -fx-background-color: #e0e0e0; /* Ciemniejsze tło */
+    -fx-opacity: 0.7; /* Lekka przezroczystość */
+}
+
+/* Przekreślenie tekstu w ukończonych zadaniach */
+.task-cell-done .label {
+    -fx-strikethrough: true;
+}

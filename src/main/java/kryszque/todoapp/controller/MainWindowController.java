@@ -26,7 +26,11 @@ public class MainWindowController {
 
     @FXML
     public void initialize() {
-        taskListView.setCellFactory(param -> new TaskCell());
+        taskListView.setCellFactory(param -> {
+            TaskCell cell = new TaskCell();
+            cell.setMainWindowController(this);
+            return cell;
+        });
         loadTasks();
     }
 

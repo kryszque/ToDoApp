@@ -23,6 +23,10 @@ public class Task {
     public int getId() {
         return this.id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     //title handling
     public void setTitle(String title) {
         try{
